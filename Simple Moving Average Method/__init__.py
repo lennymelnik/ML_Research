@@ -6,15 +6,7 @@ from binance.client import Client
 import array
 
 client = Client('1XGCXOq8RCHuKA0O322OHahi0Kg0KsSHsG4ai4Gbp7MmaLFwVEOxGoZ2G1KSjEAS','207ia9nrYf8OF3LDXjMPUShYxEDAQWUwJBxv1wzHUDmswHWlU1udgCHc7xxwyTiK')
-
-
 cryptoCount = 1
-
-
-
-
-print (depth)
-
 
 arr = array.array('i',[])
 
