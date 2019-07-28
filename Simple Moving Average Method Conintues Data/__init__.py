@@ -1,3 +1,4 @@
+
 import requests
 from datetime import datetime
 from datetime import timedelta
@@ -11,9 +12,9 @@ client = Client('1XGCXOq8RCHuKA0O322OHahi0Kg0KsSHsG4ai4Gbp7MmaLFwVEOxGoZ2G1KSjEA
 cryptoCount = 1
 
 arr = array.array('i',[])
-small = 30
-medium = 120
-large = 540
+small = 60
+medium = 540
+large = 960
 def find(total, smallavgPrice = 0, mediumavgPrice = 0, largeavgPrice = 0):
     BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=ALGOBTC")
     arr.insert(total, int(float(BTCUSDTPrice.json()['price'])))
@@ -40,12 +41,8 @@ def find(total, smallavgPrice = 0, mediumavgPrice = 0, largeavgPrice = 0):
     elif (cryptoCount > 0 and smallavgPrice <= mediumavgPrice and count >= medium):
 
         print("Sell")
-    time.sleep(1)
+    time.sleep(900)
     find(total + 1)
 
 
 find(0)
-
-
-
-Progra

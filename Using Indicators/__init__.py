@@ -1,18 +1,25 @@
-import requests
-from coinbase.wallet.client import Client
-import tulipy as ti
-
-client = Client(LImC68pA956IgcIV,nWCgEOc9X3WA6bYjTdIOEJE1v6jSwsuU)
-
-
-apiData = requests # Get data from api
-
-price = apiData.json()[][]
-
-df = #Price data from api
+#import Requests
+#from coinbase.wallet.client import Client
+#import tulipy as ti
+from binance.client import Client
+#COINBASE API
+#client = Client(LImC68pA956IgcIV,nWCgEOc9X3WA6bYjTdIOEJE1v6jSwsuU)
+client = Client('1XGCXOq8RCHuKA0O322OHahi0Kg0KsSHsG4ai4Gbp7MmaLFwVEOxGoZ2G1KSjEAS','207ia9nrYf8OF3LDXjMPUShYxEDAQWUwJBxv1wzHUDmswHWlU1udgCHc7xxwyTiK')
 
 
-superTrend = ti.s
+BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=ALGOBTC")
+arr = array.array('i',[])
+arr.insert(total, int(float(BTCUSDTPrice.json()['price'])))
+
+print(arr)
+'''apiData = requests # Get data from api
+
+#price = apiData.json()[][]
+
+#df = #Price data from api
+
+
+#superTrend = ti.s
 #Boling
 bband = ti.bbands(df, period=5, stddev=2)
 
@@ -58,6 +65,7 @@ model.fit(x=X_train,
 end_time = time.time()
 processing_time = end_time - start_time
 
-API Key: LImC68pA956IgcIV
+#API Key: LImC68pA956IgcIV
 
-API Secret: nWCgEOc9X3WA6bYjTdIOEJE1v6jSwsuU
+#API Secret: nWCgEOc9X3WA6bYjTdIOEJE1v6jSwsuU
+'''
