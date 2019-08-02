@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
+import .pyplot as plt
 import time
-import datetime
+import datetimematplotlib
+import matplotlib
 from dateutil.parser import parse
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Activation

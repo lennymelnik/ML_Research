@@ -3,8 +3,8 @@ from datetime import datetime
 from datetime import timedelta
 import easygui
 import time
-from binance.client import Client
 import array
+from coinbase.wallet.client import Client
 import tulipy as ti
 
 client = Client('1XGCXOq8RCHuKA0O322OHahi0Kg0KsSHsG4ai4Gbp7MmaLFwVEOxGoZ2G1KSjEAS','207ia9nrYf8OF3LDXjMPUShYxEDAQWUwJBxv1wzHUDmswHWlU1udgCHc7xxwyTiK')

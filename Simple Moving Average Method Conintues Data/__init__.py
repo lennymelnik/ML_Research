@@ -1,4 +1,4 @@
-
+import pandas as pd
 import requests
 from datetime import datetime
 from datetime import timedelta
@@ -7,6 +7,9 @@ import time
 from binance.client import Client
 import array
 import tulipy as ti
+
+
+
 
 client = Client('1XGCXOq8RCHuKA0O322OHahi0Kg0KsSHsG4ai4Gbp7MmaLFwVEOxGoZ2G1KSjEAS','207ia9nrYf8OF3LDXjMPUShYxEDAQWUwJBxv1wzHUDmswHWlU1udgCHc7xxwyTiK')
 cryptoCount = 1
