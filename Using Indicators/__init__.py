@@ -21,11 +21,9 @@ priceHist = client.get_historic_prices()
 print(priceHist)
 
 print('Current bitcoin price in %s: %s' % (currency_code, price.amount))
-client.request_money(
-    account_id,
-    to="leonardmelnik@gmai",
-    amount="1",
-    currency="BTC")
+print(client.get_accounts())
+
+print(client.get_transactions('fd3b21d8-21b7-5f18-881c-4359d8850a1e'))
 '''
 apiData = pd.read_csv('btc.csv', skiprows= (0,1))
 
