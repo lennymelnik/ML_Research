@@ -1,50 +1,3 @@
-import pandas as pd
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-import requests
-import time
-from lossGain import lossGain
-
-BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
-BTCUSDTPrice = BTCUSDTPrice.json()['price']
-#Prices
-names = ['Date','Symbol', 'Open', 'Close', 'Volume BTC', 'Volume USD']
-url = 'http://www.cryptodatadownload.com/cdd/Coinbase_BTCUSD_d.csv'
-df = pd.read_csv(url, skiprows=[0,1], header = None, delim_whitespace = True, na_values='?')
-
-print(df)
-
-
-new = df[0].str.split(",", n=7, expand=True)
-length =len(df)
-
-df["Date"] = new[0]
-df["Symbol"] = new[1]
-df["Open"] = new[2]
-df["High"] = new[3]
-df["Low"] = new[4]
-df["Close"] = new[5]
-df["Volume BTC"] = new[6]
-df["Volume USD"] = new[7]
-
-
-
-print(df)
-length = len(df['Close'])
-print(df['Close'][1])
-def SimpleMovingAvg(number, starting, sma = 0):
-    for i in range(number):
-        sma = sma + int(float(df["Close"][starting + 1 + i]))
-    return sma/number
-
-
-#def standardDeviation
-daySMA = 200
-timeRange = 365*2
-
-
-
 def backtest():
     startingFund = 10000
     Funds = startingFund
@@ -61,13 +14,7 @@ def backtest():
         currentAssets = 1
         smaForDay = SimpleMovingAvg(daySMA,(timeRange - i))
         dayCompare = int(float(df["Close"][timeRange - i]))
-        if (i>0):
-            dayPrevious = int(float(df["Close"][timeRange - i - 1]))
-            print("Difference ", (dayCompare / dayPrevious) * 100 - 100, "%")
-            print()
-
         dayStart = int(float(df["Close"][timeRange - i + 1]))
-
 
         #BUYING
         if (dayCompare > (smaForDay * 1.05)):
@@ -75,7 +22,7 @@ def backtest():
                 Funds = Funds - toBuy
                 inBitcoin = inBitcoin + toBuy
                 valueBought = dayCompare
-                print("Buying:    ","Funds : ",Funds,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", dayCompare, "     SMA:   ", smaForDay, "     Standard Deviation: ")
+                print("Buying:    ","Funds : ",Funds,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", m, "     SMA:   ", smaForDay, "     Standard Deviation: ")
                 print(i)
             elif (Funds < toBuy and inBitcoin > 0):
 
@@ -145,17 +92,3 @@ def backtest():
         if (i == timeRange - 1):
             print("Final:    ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                   "    SMA:   ", smaForDay, "   USD Afer:", Funds + inBitcoin * (dayCompare/valueBought), "    Profit:  ", Funds + inBitcoin * (dayCompare/valueBought) - startingFund)
-
-print(backtest())
-
-
-#Plot Close Data
-y = df.head(100)["Close"]
-y = pd.to_numeric(y)
-plt.plot(np.linspace(0,100,100),y,'k')
-plt.xlabel("The Past 100 Days")
-plt.ylabel("Bitcoin Closing Price")
-plt.show()
-
-
-#

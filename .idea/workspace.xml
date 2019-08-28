@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14d957d-3301-4daa-964b-11f9d5565582" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/200 Day SMA/modified.py" beforeDir="false" afterPath="$PROJECT_DIR$/200 Day SMA/modified.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Using Indicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Using Indicators/__init__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,11 +50,38 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/200 Day SMA/modified.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="130" column="73" selection-start-line="130" selection-start-column="73" selection-end-line="130" selection-end-column="73" />
+            <state relative-caret-position="-201">
+              <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/200 Day SMA/lossGain.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/200 Day SMA/sma.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/200 Day SMA/backtest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1410">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
             </state>
           </provider>
         </entry>
@@ -96,15 +121,16 @@
         <option value="$PROJECT_DIR$/tesing.py" />
         <option value="$PROJECT_DIR$/200 Day SMA/__init__.py" />
         <option value="$PROJECT_DIR$/Using Indicators/__init__.py" />
+        <option value="$PROJECT_DIR$/200 Day SMA/backtest.py" />
+        <option value="$PROJECT_DIR$/200 Day SMA/sma.py" />
+        <option value="$PROJECT_DIR$/200 Day SMA/lossGain.py" />
         <option value="$PROJECT_DIR$/200 Day SMA/modified.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="-1289" />
-    <option name="y" value="-1080" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -123,16 +149,6 @@
               <item name="ML_Research" type="b2602c69:ProjectViewProjectNode" />
               <item name="ML_Research" type="462c0819:PsiDirectoryNode" />
               <item name="200 Day SMA" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ML_Research" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ML_Research" type="462c0819:PsiDirectoryNode" />
-              <item name="Simple Moving Average Method Conintues Data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ML_Research" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ML_Research" type="462c0819:PsiDirectoryNode" />
-              <item name="Using Indicators" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -313,22 +329,22 @@
       <workItem from="1564670675410" duration="4478000" />
       <workItem from="1564762601980" duration="17846000" />
       <workItem from="1565195554007" duration="199000" />
-      <workItem from="1565209655752" duration="5077000" />
+      <workItem from="1565209655752" duration="14527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77890000" />
+    <option name="totallyTimeSpent" value="87340000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1289" y="-1080" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08413205" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1276252" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46831682" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5520548" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -342,7 +358,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.10170394" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.4983845" />
       <window_info anchor="right" id="R Graphics" order="4" weight="0.32956383" />
       <window_info anchor="right" id="R Packages" order="5" weight="0.32956383" />
       <window_info anchor="right" id="Database" order="6" weight="0.73101777" />
@@ -398,7 +414,7 @@
     <SUITE FILE_PATH="coverage/ML_Research$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1564773070570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/200 Day SMA" />
     <SUITE FILE_PATH="coverage/ML_Research$__init____3_.coverage" NAME="__init__ (3) Coverage Results" MODIFIED="1564856236255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Simple Moving Average Method Conintues Data" />
     <SUITE FILE_PATH="coverage/ML_Research$tesing.coverage" NAME="tesing Coverage Results" MODIFIED="1564174548194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ML_Research$modified.coverage" NAME="modified Coverage Results" MODIFIED="1565283431579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/200 Day SMA" />
+    <SUITE FILE_PATH="coverage/ML_Research$modified.coverage" NAME="modified Coverage Results" MODIFIED="1566917249785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/200 Day SMA" />
     <SUITE FILE_PATH="coverage/ML_Research$getData.coverage" NAME="getData Coverage Results" MODIFIED="1564403172161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Using Indicators" />
   </component>
   <component name="editorHistoryManager">
@@ -476,10 +492,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/200 Day SMA/sma.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/200 Day SMA/backtest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1410">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/200 Day SMA/lossGain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/200 Day SMA/modified.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="130" column="73" selection-start-line="130" selection-start-column="73" selection-end-line="130" selection-end-column="73" />
+        <state relative-caret-position="-201">
+          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
