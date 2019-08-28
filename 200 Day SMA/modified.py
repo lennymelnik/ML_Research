@@ -41,9 +41,10 @@ def SimpleMovingAvg(number, starting, sma = 0):
 
 #def standardDeviation
 daySMA = 200
-timeRange = 365*2
+timeRange = 365
 
-
+differenceList = []
+finalFund = 0
 
 def backtest():
     startingFund = 10000
@@ -63,8 +64,11 @@ def backtest():
         dayCompare = int(float(df["Close"][timeRange - i]))
         if (i>0):
             dayPrevious = int(float(df["Close"][timeRange - i - 1]))
-            print("Difference ", (dayCompare / dayPrevious) * 100 - 100, "%")
+            difference = (dayCompare / dayPrevious) * 100 - 100
+            print("Difference ", difference, "%")
             print()
+            differenceList.append(difference)
+
 
         dayStart = int(float(df["Close"][timeRange - i + 1]))
 
@@ -143,6 +147,7 @@ def backtest():
                 print(i)
 
         if (i == timeRange - 1):
+            finalFund = Funds + inBitcoin * (dayCompare/valueBought) - startingFund
             print("Final:    ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                   "    SMA:   ", smaForDay, "   USD Afer:", Funds + inBitcoin * (dayCompare/valueBought), "    Profit:  ", Funds + inBitcoin * (dayCompare/valueBought) - startingFund)
 
@@ -156,6 +161,27 @@ plt.plot(np.linspace(0,100,100),y,'k')
 plt.xlabel("The Past 100 Days")
 plt.ylabel("Bitcoin Closing Price")
 plt.show()
+timeHa = str(timeRange)
+y = differenceList
+plt.plot(np.linspace(0,len(y),len(y)),y,'k')
+print(len(y))
+plt.xlabel("The Past " + timeHa +" Days")
+plt.ylabel("Bitcoin Gain/Loss")
+plt.show()
 
+print("Difference List: ", differenceList)
 
-#
+fivePercent = sorted(differenceList)
+fivePercent = fivePercent[:round(timeRange *.05)]
+print("Five Percent", fivePercent)
+timeHa2 =  str(round(timeRange * .05))
+print("We have 95% conference that our loss will not exceed ", fivePercent[round(timeRange * .05 -1)],"%")
+print("Funds", finalFund)
+y = fivePercent
+plt.plot(np.linspace(0,len(y),len(y)),y,'o')
+print(len(y))
+print("Timerange ",timeRange)
+
+plt.xlabel("The Past " + timeHa2 +" Days")
+plt.ylabel("Lowest 5 Percent")
+plt.show()
