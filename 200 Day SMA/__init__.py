@@ -24,22 +24,31 @@ df["Close"] = new[5]
 df["Volume BTC"] = new[6]
 df["Volume USD"] = new[7]
 
+
+def convertToBTC(usdAmount, day):
+    return(usdAmount/int(float(df["Close"][timeRange - day])))
+
+def convertToUSD(btcAmount, day):
+    return(btcAmount *int(float(df["Close"][timeRange - day])))
+
 def SimpleMovingAvg(number, starting, sma = 0):
     for i in range(number):
         sma = sma + int(float(df["Close"][starting + 1 + i]))
     return sma/number
+
+
 totalFunds = []
 
 timeRange = 365*4
 def backtest():
-    Funds = 15000
-    startingFund = 15000
 
+    inUSD = 15000
+    startingFund = 15000
     inBitcoin = 0
     valueBought = 0
 
 
-    print("First Day:   ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", int(float(df["Close"][timeRange])), "     SMA:   ", SimpleMovingAvg(200,(timeRange )))
+    print("First Day:   ", "Funds : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", int(float(df["Close"][timeRange])), "     SMA:   ", SimpleMovingAvg(200,(timeRange )))
 
     for i in range(timeRange):
 
@@ -47,55 +56,65 @@ def backtest():
         dayCompare = int(float(df["Close"][timeRange - i]))
 
         if (dayCompare > (smaForDay * 1.05)):
-            if (Funds >= 10000):
-                Funds = Funds - 10000
+            if (inUSD >= 10000):
+                inBitcoin = inBitcoin + convertToBTC(10000,i)
+                inUSD = inUSD - 10000
                 inBitcoin = inBitcoin + 10000
                 valueBought = dayCompare
-                print("Buying:    ","Funds : ",Funds,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", dayCompare, "     SMA:   ", smaForDay)
-                
+                print("Buying:    ","Funds : ",inUSD,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", dayCompare, "     SMA:   ", smaForDay)
+
             elif (inBitcoin > 0 and inBitcoin < 10000):
 
-                Funds = Funds + inBitcoin * dayCompare/valuePartialBought
+                inUSD = inUSD + convertToUSD(inBitcoin, i)
+
                 inBitcoin = 0
-                print("Partial Sell:    ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
+
+                print("Partial Sell:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
                       dayCompare,
                       "    SMA:   ", smaForDay)
-            if ((Funds < 10000) and inBitcoin > 0 and inBitcoin < 10000):
-                print("Staying in:   ","Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
+
+            if ((inUSD < 10000) and inBitcoin > 0 and inBitcoin < convertToBTC(10000, i)):
+                print("Staying in:   ","USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
 
 
 
         elif (dayCompare < (smaForDay * .95)):
-            if (inBitcoin >= 10000):
+
+            if (inBitcoin >= convertToUSD(10000, i)):
                 valueSold = dayCompare
-                overallSell = 10000
                 overallPercent = valueSold/valueBought
-                Funds = Funds + overallSell * overallPercent
+                inUSD = inUSD + convertToUSD(inBitcoin, i) * overallPercent
                 inBitcoin = 0
-                print("Selling:    ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
-            elif (inBitcoin > 10000):
-                valueSold = dayCompare
-                partialSell = inBitcoin - 10000
-                overallPercent = valueSold / valueBought
-                partialPercent = valueSold / valuePartialBought
-                Funds = Funds + 10000 * overallPercent + partialSell * partialPercent
-                inBitcoin = 0
-            elif (inBitcoin == 0 and Funds > 15000):
-                valuePartialBought = dayCompare
-                tempFund = Funds - 15000
-                Funds = 15000
+                print("Selling:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
+
+            elif (inBitcoin > convertToBTC(10000, i)):
+
+                Funds = Funds + convertToUSD(inBitcoin, i)
+                print("Taking Back investment")
+
+            elif (inBitcoin == 0 and inUSD > 15000):
+
+                tempFund = inUSD - 15000
+                inUSD = 15000
                 inBitcoin = tempFund
-                print("Partial Buy:    ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
+                print("Partial Buy:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                       "    SMA:   ", smaForDay)
 
         if (i == timeRange - 1):
-            print("Final:    ", "Funds : ", Funds, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
-                  "    SMA:   ", smaForDay, "   USD Afer:", Funds + inBitcoin * (dayCompare/valueBought), "    Profit:  ", Funds + inBitcoin * (dayCompare/valueBought) - startingFund)
+            print("Final:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
+                  "    SMA:   ", smaForDay, "   USD Afer:", inUSD + convertToUSD(inBitcoin, i), "    Profit:  ", inUSD + convertToUSD(inBitcoin) - startingFund)
+
         if (inBitcoin > 0):
-            totalFund = Funds + inBitcoin * dayCompare / valueBought
+
+            totalFund = inUSD + convertToUSD(inBitcoin, i)
+
+
         else:
-            totalFund = Funds
+
+            totalFund = inUSD
+
         totalFunds.append(totalFund)
+
         print(i)
 
 print(backtest())
