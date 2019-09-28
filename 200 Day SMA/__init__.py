@@ -26,9 +26,11 @@ df["Volume USD"] = new[7]
 
 
 def convertToBTC(usdAmount, day):
+
     return(usdAmount/int(float(df["Close"][timeRange - day])))
 
 def convertToUSD(btcAmount, day):
+
     return(btcAmount *int(float(df["Close"][timeRange - day])))
 
 def SimpleMovingAvg(number, starting, sma = 0):
@@ -56,14 +58,14 @@ def backtest():
         dayCompare = int(float(df["Close"][timeRange - i]))
 
         if (dayCompare > (smaForDay * 1.05)):
-            if (inUSD >= 10000):
+            if (inUSD > 10000):
                 inBitcoin = inBitcoin + convertToBTC(10000,i)
                 inUSD = inUSD - 10000
-                inBitcoin = inBitcoin + 10000
+
                 valueBought = dayCompare
                 print("Buying:    ","Funds : ",inUSD,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", dayCompare, "     SMA:   ", smaForDay)
 
-            elif (inBitcoin > 0 and inBitcoin < 10000):
+            elif (inBitcoin > 0 and inBitcoin < convertToUSD(10000, i)):
 
                 inUSD = inUSD + convertToUSD(inBitcoin, i)
 
@@ -76,11 +78,12 @@ def backtest():
             if ((inUSD < 10000) and inBitcoin > 0 and inBitcoin < convertToBTC(10000, i)):
                 print("Staying in:   ","USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
 
-
+            else:
+                print("Don't do anything")
 
         elif (dayCompare < (smaForDay * .95)):
 
-            if (inBitcoin >= convertToUSD(10000, i)):
+            if (inBitcoin >= convertToBTC(10000, i)):
                 valueSold = dayCompare
                 overallPercent = valueSold/valueBought
                 inUSD = inUSD + convertToUSD(inBitcoin, i) * overallPercent
@@ -89,20 +92,31 @@ def backtest():
 
             elif (inBitcoin > convertToBTC(10000, i)):
 
-                Funds = Funds + convertToUSD(inBitcoin, i)
-                print("Taking Back investment")
+                inUSD = inUSD + convertToUSD(inBitcoin - convertToBTC(10000), i)
+                inBitcoin = convertToBTC(10000,i)
+
+
+                print("Partial Sell:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
+                      "    SMA:   ", smaForDay)
 
             elif (inBitcoin == 0 and inUSD > 15000):
 
                 tempFund = inUSD - 15000
                 inUSD = 15000
-                inBitcoin = tempFund
+                inBitcoin = convertToBTC(tempFund, i)
+
                 print("Partial Buy:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                       "    SMA:   ", smaForDay)
+            elif (inBitcoin ==  0):
+                print("Do nothing:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
+                      dayCompare,
+                      "    SMA:   ", smaForDay)
 
+        else:
+            print("Price difference does not matter")
         if (i == timeRange - 1):
             print("Final:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
-                  "    SMA:   ", smaForDay, "   USD Afer:", inUSD + convertToUSD(inBitcoin, i), "    Profit:  ", inUSD + convertToUSD(inBitcoin) - startingFund)
+                  "    SMA:   ", smaForDay, "   USD Afer:", inUSD + convertToUSD(inBitcoin, i), "    Profit:  ", inUSD + convertToUSD(inBitcoin, i) - startingFund)
 
         if (inBitcoin > 0):
 
