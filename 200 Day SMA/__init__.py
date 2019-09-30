@@ -107,7 +107,8 @@ def backtest():
 
                 print("Partial Buy:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                       "    SMA:   ", smaForDay)
-            elif (inBitcoin ==  0):
+
+            else:
                 print("Do nothing:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
                       dayCompare,
                       "    SMA:   ", smaForDay)
