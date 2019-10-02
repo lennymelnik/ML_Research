@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 import requests
-import time
+
 
 BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
 BTCUSDTPrice = BTCUSDTPrice.json()['price']
