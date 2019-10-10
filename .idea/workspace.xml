@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d14d957d-3301-4daa-964b-11f9d5565582" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/200 Day SMA/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/200 Day SMA/__init__.py" afterDir="false" />
-    </list>
+    <list default="true" id="d14d957d-3301-4daa-964b-11f9d5565582" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/200 Day SMA/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-644">
+            <state relative-caret-position="-312">
               <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
             </state>
           </provider>
@@ -271,12 +269,12 @@
       <workItem from="1565195554007" duration="199000" />
       <workItem from="1565209655752" duration="20539000" />
       <workItem from="1569521570521" duration="1629000" />
-      <workItem from="1569642074102" duration="5079000" />
+      <workItem from="1569642074102" duration="5300000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100060000" />
+    <option name="totallyTimeSpent" value="100281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1080" y="-1120" width="1080" height="1920" extended-state="0" />
@@ -287,7 +285,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.17945945" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.17945945" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -457,7 +455,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/200 Day SMA/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-644">
+        <state relative-caret-position="-312">
           <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>

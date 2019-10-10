@@ -1,3 +1,5 @@
+##Will make decisions based on risk analysis
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,8 +25,6 @@ df["Close"] = new[5]
 df["Volume BTC"] = new[6]
 df["Volume USD"] = new[7]
 
-print("Do you want to see every step? (Y/N)")
-seeResults = input()
 
 def convertToBTC(usdAmount, day):
 
@@ -41,8 +41,7 @@ def SimpleMovingAvg(number, starting, sma = 0):
 
 
 totalFunds = []
-differenceList = []
-finalFund = 0
+
 timeRange = 365*4
 def backtest():
 
@@ -51,18 +50,13 @@ def backtest():
     inBitcoin = 0
     valueBought = 0
 
-    if(seeResults == 'y'):
-        print("First Day:   ", "Funds : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", int(float(df["Close"][timeRange])), "     SMA:   ", SimpleMovingAvg(200,(timeRange )))
-    
+
+    print("First Day:   ", "Funds : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", int(float(df["Close"][timeRange])), "     SMA:   ", SimpleMovingAvg(200,(timeRange )))
 
     for i in range(timeRange):
 
         smaForDay = SimpleMovingAvg(200,(timeRange - i))
         dayCompare = int(float(df["Close"][timeRange - i]))
-        if (i>0):
-            dayPrevious = int(float(df["Close"][timeRange - i - 1]))
-            difference = (dayCompare / dayPrevious) * 100 - 100
-            differenceList.append(difference)
 
         if (dayCompare > (smaForDay * 1.05)):
             if (inUSD > 10000):
@@ -70,26 +64,23 @@ def backtest():
                 inUSD = inUSD - 10000
 
                 valueBought = dayCompare
-                if(seeResults == 'y'):
-                    print("Buying:    ","Funds : ",inUSD,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", dayCompare, "     SMA:   ", smaForDay)
+                print("Buying:    ","Funds : ",inUSD,"   In Bitcoin: ", inBitcoin,"  Bitcoin Price: ", dayCompare, "     SMA:   ", smaForDay)
 
             elif (inBitcoin > 0 and inBitcoin < convertToUSD(10000, i)):
 
                 inUSD = inUSD + convertToUSD(inBitcoin, i)
 
                 inBitcoin = 0
-                if(seeResults == 'y'):
-                    print("Partial Sell:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
+
+                print("Partial Sell:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
                       dayCompare,
                       "    SMA:   ", smaForDay)
 
             if ((inUSD < 10000) and inBitcoin > 0 and inBitcoin < convertToBTC(10000, i)):
-                if(seeResults == 'y'):
-                    print("Staying in:   ","USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
+                print("Staying in:   ","USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
 
             else:
-                if(seeResults == 'y'):
-                    print("Don't do anything")
+                print("Don't do anything")
 
         elif (dayCompare < (smaForDay * .95)):
 
@@ -98,16 +89,15 @@ def backtest():
                 overallPercent = valueSold/valueBought
                 inUSD = inUSD + convertToUSD(inBitcoin, i) * overallPercent
                 inBitcoin = 0
-                if(seeResults == 'y'):
-                    print("Selling:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
+                print("Selling:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare, "    SMA:   ", smaForDay)
 
             elif (inBitcoin > convertToBTC(10000, i)):
 
                 inUSD = inUSD + convertToUSD(inBitcoin - convertToBTC(10000), i)
                 inBitcoin = convertToBTC(10000,i)
 
-                if(seeResults == 'y'):
-                    print("Partial Sell:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
+
+                print("Partial Sell:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                       "    SMA:   ", smaForDay)
 
             elif (inBitcoin == 0 and inUSD > 15000):
@@ -115,19 +105,21 @@ def backtest():
                 tempFund = inUSD - 15000
                 inUSD = 15000
                 inBitcoin = convertToBTC(tempFund, i)
-                if(seeResults == 'y'):
-                    print("Partial Buy:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
+
+                print("Partial Buy:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
                       "    SMA:   ", smaForDay)
 
-            elif(seeResults == 'y'):
+            else:
                 print("Do nothing:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ",
                       dayCompare,
                       "    SMA:   ", smaForDay)
 
-        elif(seeResults == 'y'):
+        else:
             print("Price difference does not matter")
-        
-             
+        if (i == timeRange - 1):
+            print("Final:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
+                  "    SMA:   ", smaForDay, "   USD Afer:", inUSD + convertToUSD(inBitcoin, i), "    Profit:  ", inUSD + convertToUSD(inBitcoin, i) - startingFund)
+
         if (inBitcoin > 0):
 
             totalFund = inUSD + convertToUSD(inBitcoin, i)
@@ -136,26 +128,11 @@ def backtest():
         else:
 
             totalFund = inUSD
+
         totalFunds.append(totalFund)
-        if (i == timeRange - 1):
-            if(seeResults == 'y'):
-                print("Final:    ", "USD : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", dayCompare,
-                  "    SMA:   ", smaForDay, "   USD Afer:", inUSD + convertToUSD(inBitcoin, i), "    Profit:  ", inUSD + convertToUSD(inBitcoin, i) - startingFund)
-       
-            return(totalFund)
 
+        print(i)
 
-            
-
-  
-
-finalFund = backtest()
+print(backtest())
 plt.plot(np.linspace(0,len(totalFunds),len(totalFunds)), totalFunds )
-
-timeHa = str(timeRange)
-fivePercent = sorted(differenceList)
-fivePercent = fivePercent[:round(timeRange *.05)]
-timeHa2 =  str(round(timeRange * .05))
-print("We have 95% confidence that our loss will not exceed ", fivePercent[round(timeRange * .05 -1)]* .01 * finalFund, "which is ", fivePercent[round(timeRange * .05 -1)], "% of our funds" )
-print("Funds", finalFund)
 plt.show()
