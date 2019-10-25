@@ -55,7 +55,7 @@ finalFund = 0
 timeRange = 365*4
 
 def backtest(percentBuy,percentSell):
-    if(whatMethod == 1):
+    if(whatMethod == '1'):
         inUSD = 15000
         startingFund = 15000
         inBitcoin = 0
@@ -175,13 +175,13 @@ def backtest(percentBuy,percentSell):
                     if(percentLoss < percentSell):
                         if(seeResults == 'y'):
                             print("sell")
-                        inUSD = inUSD + convertToUSD(inBitcoin, i)
-                        inBitcoin = 0
+                        inUSD = inUSD + convertToUSD(inBitcoin * .25, i)
+                        inBitcoin = inBitcoin * .75
                     elif(percentLoss > percentBuy):
                         if(seeResults == 'y'):
                             print("buy/stay")
-                        inBitcoin = inBitcoin + convertToBTC(inUSD, i)
-                        inUSD = 0
+                        inBitcoin = inBitcoin + convertToBTC(inUSD *.25, i)
+                        inUSD = inUSD * .75
 
             
 
@@ -194,9 +194,10 @@ def backtest(percentBuy,percentSell):
 #print(finalFund)
 hello = True
 i = 0
-while(True):
-    i = i + 1
-    print(i,backtest(-3, -5))
+print(backtest(-3,-6))
+
+print(backtest(-3,-5))
+
 
     
 
