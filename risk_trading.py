@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import requests
 import random
+import sys
 
 BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
 BTCUSDTPrice = BTCUSDTPrice.json()['price']
@@ -54,11 +55,19 @@ randIntBottom = []
 endValue = []
 finalFund = 0
 timeRange = 365*4
-for i in range(10000):
+
+testingAmount = 10000
+sys.stdout.write("[%s]" % (" " * 40))
+sys.stdout.flush()
+sys.stdout.write("\b" * (40+1))
+for i in range(testingAmount):
     inUSD = 15000
     startingFund = 15000
     inBitcoin = 0
     valueBought = 0
+    if((i % round(testingAmount/40)) == 0):
+        sys.stdout.write("-")
+        sys.stdout.flush()
             
     if(seeResults == 'y'):
         print("First Day:   ", "Funds : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", int(float(df["Close"][timeRange])), "     SMA:   ", SimpleMovingAvg(200,(timeRange )))
@@ -69,6 +78,7 @@ for i in range(10000):
         
                 
         if (i < timeRange):
+
             dayCompare = int(float(df["Close"][timeRange - i]))
             dayPrevious = int(float(df["Close"][timeRange - i - 1]))
             difference = (dayCompare / dayPrevious) * 100 - 100
@@ -82,20 +92,21 @@ for i in range(10000):
                 if(percentLoss < top):
                     if(seeResults == 'y'):
                         print("sell")
-                    inUSD = inUSD + convertToUSD(inBitcoin * .25, i)
-                    inBitcoin = inBitcoin * .75
+                    inUSD = inUSD + convertToUSD(inBitcoin * .3, i)
+                    inBitcoin = inBitcoin * .7
                 elif(percentLoss > bottom):
                     if(seeResults == 'y'):
                         print("buy/stay")
-                    inBitcoin = inBitcoin + convertToBTC(inUSD *.25, i)
-                    inUSD = inUSD * .75
+                    inBitcoin = inBitcoin + convertToBTC(inUSD *.30, i)
+                    inUSD = inUSD * .70
+            
             totalFunds.append(inUSD + convertToUSD(inBitcoin, i))
             
             
 
         else:
             print("Done")
-
+    
     #plt.plot(np.linspace(0, len(totalFunds), len(totalFunds)), totalFunds)
     #plt.show()
     endValue.append(inUSD + convertToUSD(inBitcoin, i))
@@ -103,6 +114,8 @@ for i in range(10000):
     randIntBottom.append(bottom)
     totalFunds = []
     differenceList = []
+    
+sys.stdout.write("]\n")
 print(max(endValue))
 print()
 finalValue = endValue.index(max(endValue))
