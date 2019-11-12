@@ -4,16 +4,41 @@ import matplotlib.pyplot as plt
 import requests
 import random
 import sys
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+import csv
+
+driver = webdriver.Chrome(executable_path='/home/haxername/Documents/haxerbrain_backend/chromedriver')
+
+def check_exists_by_xpath(xpath):
+    try:
+        driver.find_element_by_xpath(xpath)
+    except NoSuchElementException:
+        return False
+    return True
+
+driver.get('https://finance.yahoo.com/quote/AAPL/history?p=AAPL')
+#driver.implicitly_wait(0)
+
+downloadDataLink = driver.find_element_by_xpath('/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[1]/div[2]/span[2]/a')
+url2 = downloadDataLink.get_attribute("href")
+print(url2)
+with open("stocks.csv") as f:
+    reader = csv.reader(f)
+    liste = list(reader)
+print(liste[0])
+
+csv_list = []
+
+for i in liste:
+    csv_list.append(url2.replace("AAPL", liste[i]))
+print(liste)
 
 BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
 BTCUSDTPrice = BTCUSDTPrice.json()['price']
 #Prices
 names = ['Date','Symbol', 'Open', 'Close', 'Volume BTC', 'Volume USD']
 url = 'http://www.cryptodatadownload.com/cdd/Coinbase_BTCUSD_d.csv'
-
-
-
-
 df = pd.read_csv(url, skiprows=[0,1], header = None, delim_whitespace = True, na_values='?')
 new = df[0].str.split(",", n=7, expand=True)
 length =len(df)
@@ -126,9 +151,7 @@ for i in range(testingAmount):
         ##print(inUSD + convertToUSD(inBitcoin, i))
     
 sys.stdout.write("]\n")
+print(max(endValue))
 
-for i in range(50):
-    print(max(endValue))
-    finalValue = endValue.index(max(endValue))
-    print("Sell at:", randIntTop[finalValue], " Buy at: ", randIntBottom[finalValue], "price :", buySell[finalValue])
-    endValue.remove(max(endValue))
+finalValue = endValue.index(max(endValue))
+print("Sell at:", randIntTop[finalValue], " Buy at: ", randIntBottom[finalValue], "price :", buySell[finalValue])

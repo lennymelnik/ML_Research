@@ -54,7 +54,7 @@ differenceList = []
 finalFund = 0
 timeRange = 365*4
 
-def backtest(percentBuy,percentSell):
+def backtest():
     if(whatMethod == 1):
         inUSD = 15000
         startingFund = 15000
@@ -152,7 +152,7 @@ def backtest(percentBuy,percentSell):
                 return(totalFund)
 
     else:
-        inUSD = 15000
+        inUSD = 150000
         startingFund = 15000
         inBitcoin = 0
         valueBought = 0
@@ -169,37 +169,34 @@ def backtest(percentBuy,percentSell):
                 difference = (dayCompare / dayPrevious) * 100 - 100
                 differenceList.append(difference)
                 if(i > round(timeRange *.1)):
-                    finalFund = inUSD +convertToUSD(inBitcoin, i)
+                    
                     percentLoss = returnRisk(timeRange, differenceList, finalFund)
 
-                    if(percentLoss < percentSell):
+                    if(percentLoss < -6.11):
                         if(seeResults == 'y'):
                             print("sell")
-                        inUSD = inUSD + convertToUSD(inBitcoin, i)
-                        inBitcoin = 0
-                    elif(percentLoss > percentBuy):
+                        inUSD = inUSD + convertToUSD(inBitcoin * .99, i)
+                        inBitcoin = inBitcoin * .01
+                    elif(percentLoss > -1.04):
                         if(seeResults == 'y'):
                             print("buy/stay")
-                        inBitcoin = inBitcoin + convertToBTC(inUSD, i)
-                        inUSD = 0
+                        inBitcoin = inBitcoin + convertToBTC(inUSD *.99, i)
+                        inUSD = inUSD * .01
 
             
 
                 
             else:
                 print("Done")
+            finalFund = inUSD +convertToUSD(inBitcoin, i)
+            totalFunds.append(finalFund)
         return finalFund
        
-#finalFund = backtest(-3, -5)
+finalFund = backtest()
 #print(finalFund)
-hello = True
-i = 0
-while(True):
-    i = i + 1
-    print(i,backtest(-3, -5))
 
     
 
-#plt.plot(np.linspace(0,len(totalFunds),len(totalFunds)), totalFunds )
+plt.plot(np.linspace(0,len(totalFunds),len(totalFunds)), totalFunds )
 
-#plt.show()
+plt.show()

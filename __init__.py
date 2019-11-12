@@ -194,12 +194,9 @@ def backtest(percentBuy,percentSell):
 #print(finalFund)
 hello = True
 i = 0
-print(backtest(-3,-6))
+print(backtest(-1.05,-4.72))
 
 print(backtest(-3,-5))
-
-
-    
 
 #plt.plot(np.linspace(0,len(totalFunds),len(totalFunds)), totalFunds )
 
