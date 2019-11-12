@@ -29,10 +29,11 @@ with open("stocks.csv") as f:
 print(liste[0])
 
 csv_list = []
-
+number2 = 0
 for i in liste:
-    csv_list.append(url2.replace("AAPL", liste[i]))
-print(liste)
+    csv_list.append(url2.replace("AAPL", str(liste[number2]).replace("['","").replace("']","")))
+    number2 = number2 + 1
+print(csv_list)
 
 BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
 BTCUSDTPrice = BTCUSDTPrice.json()['price']
