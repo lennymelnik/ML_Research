@@ -4,25 +4,10 @@ import matplotlib.pyplot as plt
 import requests
 import random
 import sys
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
 import csv
+import yfinance as yf
 
-driver = webdriver.Chrome(executable_path='/home/haxername/Documents/haxerbrain_backend/chromedriver')
 
-def check_exists_by_xpath(xpath):
-    try:
-        driver.find_element_by_xpath(xpath)
-    except NoSuchElementException:
-        return False
-    return True
-
-driver.get('https://finance.yahoo.com/quote/AAPL/history?p=AAPL')
-#driver.implicitly_wait(0)
-
-downloadDataLink = driver.find_element_by_xpath('/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[1]/div[2]/span[2]/a')
-url2 = downloadDataLink.get_attribute("href")
-print(url2)
 with open("stocks.csv") as f:
     reader = csv.reader(f)
     liste = list(reader)
@@ -31,7 +16,8 @@ print(liste[0])
 csv_list = []
 number2 = 0
 for i in liste:
-    csv_list.append(url2.replace("AAPL", str(liste[number2]).replace("['","").replace("']","")))
+    print(i[1:])
+    print(yf.Ticker(i[2:-2]).history(period="max")["Close"])
     number2 = number2 + 1
 print(csv_list)
 
