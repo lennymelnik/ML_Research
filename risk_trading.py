@@ -4,42 +4,24 @@ import matplotlib.pyplot as plt
 import requests
 import random
 import sys
-
+import __
 BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
 BTCUSDTPrice = BTCUSDTPrice.json()['price']
-#Prices
-names = ['Date','Symbol', 'Open', 'Close', 'Volume BTC', 'Volume USD']
-url = 'http://www.cryptodatadownload.com/cdd/Coinbase_BTCUSD_d.csv'
 
-
-
-
-df = pd.read_csv(url, skiprows=[0,1], header = None, delim_whitespace = True, na_values='?')
-new = df[0].str.split(",", n=7, expand=True)
-length =len(df)
-
-df["Date"] = new[0]
-df["Symbol"] = new[1]
-df["Open"] = new[2]
-df["High"] = new[3]
-df["Low"] = new[4]
-df["Close"] = new[5]
-df["Volume BTC"] = new[6]
-df["Volume USD"] = new[7]
 
 
 seeResults = 'n'
 def convertToBTC(usdAmount, day):
 
-    return(usdAmount/int(float(df["Close"][timeRange - day])))
+    return(usdAmount/int(float(data.df["Close"][timeRange - day])))
 
 def convertToUSD(btcAmount, day):
 
-    return(btcAmount *int(float(df["Close"][timeRange - day])))
+    return(btcAmount *int(float(data.df["Close"][timeRange - day])))
 
 def SimpleMovingAvg(number, starting, sma = 0):
     for i in range(number):
-        sma = sma + int(float(df["Close"][starting + 1 + i]))
+        sma = sma + int(float(data.df["Close"][starting + 1 + i]))
     return sma/number
 
 def returnRisk(timerange, differentList, finalFund):
@@ -65,6 +47,7 @@ testingAmount = 100
 sys.stdout.write("[%s]" % (" " * 40))
 sys.stdout.flush()
 sys.stdout.write("\b" * (40+1))
+
 for i in range(testingAmount):
 
     inUSD = 15000
@@ -87,8 +70,8 @@ for i in range(testingAmount):
                     
             if (i < timeRange):
 
-                dayCompare = int(float(df["Close"][timeRange - i]))
-                dayPrevious = int(float(df["Close"][timeRange - i - 1]))
+                dayCompare = int(float(data.df["Close"][timeRange - i]))
+                dayPrevious = int(float(data.df["Close"][timeRange - i - 1]))
                 difference = (dayCompare / dayPrevious) * 100 - 100
                 differenceList.append(difference)
                 

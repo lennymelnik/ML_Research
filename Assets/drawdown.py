@@ -18,3 +18,6 @@ def findDrawdown(inputArray):
     minValue = min(inputArray[:-temp])
     drawdownFound = (maxValue - minValue)/maxValue
     return minValue, maxValue, drawdownFound
+
+
+print(findDrawdown(play))
