@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-import .pyplot as plt
+import matplotlib.pyplot as plt
 import time
-import datetimematplotlib
+import datetime
 import matplotlib
 from dateutil.parser import parse
 from keras.models import Sequential

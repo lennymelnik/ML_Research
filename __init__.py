@@ -176,8 +176,8 @@ def backtest(percentBuy,percentSell):
                 print("Done")
         return finalFund
        
-#finalFund = backtest(-3, -5)
-#print(finalFund)
+finalFund = backtest(-3, -5)
+print(finalFund)
 hello = True
 i = 0
 print(backtest(-1.05,-4.72))

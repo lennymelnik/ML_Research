@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import requests
 import random
 import sys
-import __
+import data
 BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
 BTCUSDTPrice = BTCUSDTPrice.json()['price']
 
