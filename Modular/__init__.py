@@ -60,16 +60,15 @@ def returnRisk(timerange, differenceList, finalFund):
     if(seeResults == 'y'):
         print("We have 95% confidence that our loss will not exceed ", fivePercent[round(timerange * .05 -1)]* .01 * finalFund, "which is ", fivePercent[round(timerange * .05 -1)], "% of our funds" )
         print("Funds", finalFund)
-    return(fivePercent[round(timerange * .05 -1)])
+    return(fivePercent[round(timerange * .05) - 1])
 
 def plot(sell, buy, price):
     totalFunds = []
     differenceList = []
     inUSD = 1000
     inBitcoin = 0
-    timeRange = 365*4
+    timeRange = 365*2
 
-            
        
     print("First Day:   ", "Funds : ", inUSD, "   In Bitcoin: ", inBitcoin, "  Bitcoin Price: ", int(float(df["Close"][timeRange])), "     SMA:   ", SimpleMovingAvg(200,(timeRange )))
 
