@@ -111,7 +111,7 @@ def find():
     endValue = []
     buySell = []
     finalFund = 0
-    timeRange = 365*3
+    timeRange = 365*1
 
     testingAmount = 10
     sys.stdout.write("[%s]" % (" " * 40))
@@ -189,5 +189,5 @@ def find():
 
     finalValue = endValue.index(max(endValue))
     print("Sell at:", randIntTop[finalValue], " Buy at: ", randIntBottom[finalValue], "price :", buySell[finalValue])
-plot(-4.19,-1.6500000000000001,0.09)
-#find()
+#plot(-4.19,-1.6500000000000001,0.09)
+find()
