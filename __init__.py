@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 import requests
 import data
 
-BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
-BTCUSDTPrice = BTCUSDTPrice.json()['price']
-
 print("Do you want to see every step? (Y/N)")
 seeResults = input()
 
@@ -138,8 +135,8 @@ def backtest(percentBuy,percentSell):
                 return(totalFund)
 
     else:
-        inUSD = 15000
-        startingFund = 15000
+        inUSD = 1000
+        startingFund = 1000
         inBitcoin = 0
         valueBought = 0
         
@@ -183,6 +180,6 @@ i = 0
 print(backtest(-1.05,-4.72))
 
 
-#plt.plot(np.linspace(0,len(totalFunds),len(totalFunds)), totalFunds )
+plt.plot(np.linspace(0,len(totalFunds),len(totalFunds)), totalFunds )
 
-#plt.show()
+plt.show()

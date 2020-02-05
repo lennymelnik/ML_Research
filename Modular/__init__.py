@@ -5,7 +5,7 @@ import requests
 import random
 import sys
 import csv
-import yfinance as yf
+
 
 
 with open("stocks.csv") as f:
@@ -15,14 +15,14 @@ print(liste[0])
 
 csv_list = []
 number2 = 0
-for i in liste:
+""" for i in liste:
     print(i[1:])
     print(yf.Ticker(i[2:-2]).history(period="max")["Close"])
     number2 = number2 + 1
-print(csv_list)
+print(csv_list) """
 
-BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
-BTCUSDTPrice = BTCUSDTPrice.json()['price']
+#BTCUSDTPrice = requests.get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
+#BTCUSDTPrice = BTCUSDTPrice.json()['price']
 #Prices
 names = ['Date','Symbol', 'Open', 'Close', 'Volume BTC', 'Volume USD']
 url = 'http://www.cryptodatadownload.com/cdd/Coinbase_BTCUSD_d.csv'
@@ -79,10 +79,11 @@ sys.stdout.flush()
 sys.stdout.write("\b" * (40+1))
 for i in range(testingAmount):
 
-    inUSD = 15000
-    startingFund = 15000
+    inUSD = 1000
+    startingFund = 1000
     inBitcoin = 0
     valueBought = 0
+
     if((i % round(testingAmount/40)) == 0):
         sys.stdout.write("-")
         sys.stdout.flush()
